@@ -1,5 +1,5 @@
 # Personal website
-This is the code for my personal website.
+This is the code for personal website.
 
 ### Credits
 I built my website using code and inspiration from many that came before me, including:
