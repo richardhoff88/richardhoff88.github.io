@@ -33,27 +33,24 @@ During my undergrad I was advised by professors [George Konidaris](https://cs.br
             </td>
             <td style="padding:20px;width:75%;vertical-align:middle">
               <p style="font-family:'Lato',Verdana,Helvetica,sans-serif; font-size:14px;font-weight:700">
-              Efficient Online Reinforcement Learning Fine-Tuning Need Not Retain Offline Data
+              Object-Pose Estimation With Neural Population Codes
               </p>
               <div class="skills">
-                <span class="skill">deep reinforcement learning</span>
-                <span class="skill">fine-tuning</span>
+                <span class="skill">computer vision</span>
+                <span class="skill">population code</span>
               </div>
-              <a href="https://zhouzypaul.github.io">Zhiyuan Zhou*</a>,
-              <strong>Andy Peng*</strong>,
-              <a href="https://colinqiyangli.github.io">Qiyang Li</a>,
-              <a href="https://people.eecs.berkeley.edu/~svlevine/">Sergey Levine</a>,
-              <a href="https://aviralkumar2907.github.io">Aviral Kumar</a>,
+              <a href="https://heikohoffmann.de/">Heiko Hoffmann*</a>,
+              <strong>Richard Hoffmann*</strong>,
               <br>
 				<em>arXiv preprint</em>, 2024
               <br>
-              [<a href="http://arxiv.org/abs/2412.07762">paper</a>]
+              [<a href="https://arxiv.org/abs/2502.13403">paper</a>]
               [<a href="/wsrl/">website</a>]
-              [<a href="https://github.com/zhouzypaul/wsrl">code</a>]
+              [<a href="/wsrl/">code</a>]
               <br>
               <p>
               Can we finetune policies and values from offline RL <b>*without retaining the offline data*</b>? Current methods require keeping the offline data
-              for stability and performance, but this make RL hard to scale up when the offline dataset gets bigger and bigger. Turns out a simple receipe, Warm-start RL, is able to finetune rapidly without data retention! <br>
+              Robotic assembly tasks require precise object-pose estimation, but object symmetry makes direct rotation prediction ambiguous. Could using a <b>*neural population code*</b> for object rotation enable faster and more accurate pose estimation, achieving a higher accuracy on the T-LESS dataset in less time compared to direct pose mapping?<br>
               </p>
             </td>
           </tr>
