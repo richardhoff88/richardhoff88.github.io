@@ -39,8 +39,8 @@ During my undergrad I was advised by professors [George Konidaris](https://cs.br
                 <span class="skill">computer vision</span>
                 <span class="skill">population code</span>
               </div>
-              <a href="https://heikohoffmann.de/">Heiko Hoffmann*</a>,
-              <strong>Richard Hoffmann*</strong>,
+              <a href="https://heikohoffmann.de/">Heiko Hoffmann</a>,
+              <strong>Richard Hoffmann</strong>,
               <br>
 				<em>arXiv preprint</em>, 2024
               <br>
@@ -49,7 +49,6 @@ During my undergrad I was advised by professors [George Konidaris](https://cs.br
               [<a href="/wsrl/">code</a>]
               <br>
               <p>
-              Can we finetune policies and values from offline RL <b>*without retaining the offline data*</b>? Current methods require keeping the offline data
               Robotic assembly tasks require precise object-pose estimation, but object symmetry makes direct rotation prediction ambiguous. Could using a <b>*neural population code*</b> for object rotation enable faster and more accurate pose estimation, achieving a higher accuracy on the T-LESS dataset in less time compared to direct pose mapping?<br>
               </p>
             </td>
