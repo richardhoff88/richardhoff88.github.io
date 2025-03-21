@@ -4,7 +4,7 @@ layout: splash
 permalink: /
 ---
 
-![Richard Hoffmann](chard.png)
+![Richard Hoffmann](./images/richard.jpeg)
 {:style="float: right; padding: 30px; max-width: 20%; min-width: 230px;"}
 
 <br/>
