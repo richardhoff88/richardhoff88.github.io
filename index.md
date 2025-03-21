@@ -4,8 +4,8 @@ layout: splash
 permalink: /
 ---
 
-![Richard Hoffmann](headshot.png)
-{:style="float: right; padding: 30px; max-width: 30%; min-width: 330px;"}
+![Richard Hoffmann](chard.png)
+{:style="float: right; padding: 30px; max-width: 20%; min-width: 230px;"}
 
 <br/>
 Hey! I'm Richard, a second-year undergrad at [Caltech](https://www.caltech.edu/) studying Computer Science and minoring in Mathematics and Control & Dynamical Systems (CDS). 
