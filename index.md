@@ -20,4 +20,4 @@ If you'd like to chat, please reach out at [rhoffman at caltech dot edu].
 
 ## Recent News
 last updated: Mar 2025
-- My dad(Researcher at HRL) and I released a paper, my first one! We explore a novel neural population code method to accurately estimate object orientation. I'm excited to see how [Object-Pose Estimation With Neural Population Codes](https://arxiv.org/abs/2502.13403) can be scaled to enhance robot perception and improve autonomous vehicle driving. 
+- My dad and I released a paper, my first one! We explore a novel neural population code method to accurately estimate object orientation. I'm excited to see how [Object-Pose Estimation With Neural Population Codes](https://arxiv.org/abs/2502.13403) can be scaled to enhance robot perception and improve autonomous vehicle driving. 
