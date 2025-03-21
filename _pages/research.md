@@ -42,7 +42,7 @@ During my undergrad I was advised by professors [George Konidaris](https://cs.br
               <a href="https://heikohoffmann.de/">Heiko Hoffmann</a>,
               <strong>Richard Hoffmann</strong>,
               <br>
-				<em>arXiv preprint</em>, 2024
+				<em>arXiv preprint</em>, 2025
               <br>
               [<a href="https://arxiv.org/abs/2502.13403">paper</a>]
               [<a href="/wsrl/">website</a>]
