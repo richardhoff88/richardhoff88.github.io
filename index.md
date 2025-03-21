@@ -4,19 +4,17 @@ layout: splash
 permalink: /
 ---
 
-![Richard Hoffmann](richard.jpeg)
+![Richard Hoffmann](headshot.png)
 {:style="float: right; padding: 30px; max-width: 30%; min-width: 330px;"}
 
 <br/>
 Hey! I'm Richard, a second-year undergrad at [Caltech](https://www.caltech.edu/) studying Computer Science and minoring in Mathematics and Control & Dynamical Systems (CDS). 
 
-My research interests lie in building efficient and scalable models for solving hard problems in math and robotics, through reinforcement learning and fine-tuning. I'm particularly interested in applications to self-driving vehicles and intelligent robotics, specifically through spatial reasoning, large language models, model predictive control, and perception/vision.
+My research interests lie in building scalable models for solving hard problems in math and robotics, through reinforcement learning and fine-tuning. I'm particularly interested in applications to self-driving vehicles and intelligent robotics, specifically through spatial reasoning, large language models, model predictive control, and perception/vision.
 
-Currently, I'm working frameworks for reinforcement learning from human feedback (RLHF) and LLM fine-tuning to prove Olympiad-level (and beyond) inequalities under [Prof. Tony Yue Yu](https://tyy.caltech.edu/) through [Caltech PMA](https://pma.caltech.edu/). Outside my research, I have taken classes on Deep Learning, LLM's, Optimal Control, Algorithms, and Markov Chains to name a few.
+Currently, I'm working frameworks for reinforcement learning from human feedback (RLHF) and LLM fine-tuning to prove Olympiad-level (and beyond) inequalities under [Prof. Tony Yue Yu](https://tyy.caltech.edu/) through [Caltech PMA](https://pma.caltech.edu/). I've previously worked under [Dr. Alec Reed](https://www.colorado.edu/cs/alec-reed) at CU Boulder's [Autonomous Robotics Lab](https://arpg.github.io/) on predictive vehicle dynamics. Outside my research, I have taken classes on Deep Learning, LLM's, Optimal Control, Algorithms, and Markov Chains to name a few.
 
 Last summer, I worked on software development and operations research at [Commerzbank](https://www.commerzbank.de/group/) in New York City. I'll be in Seattle this summer interning at [Amazon Web Services](https://aws.amazon.com/?nc2=h_lg)!
-
-Outside of school, I'm a runner for Caltech's Cross Country and Track & Field teams. I'm also on the lookout for the best hand-made noodles in SoCal. 
 
 If you'd like to chat, please reach out at [rhoffman at caltech dot edu].
 
