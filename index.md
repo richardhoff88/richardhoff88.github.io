@@ -4,21 +4,22 @@ layout: splash
 permalink: /
 ---
 
-![Andy Peng](./images/andyprofile.jpg)
+![Richard Hoffmann](richard.jpeg)
 {:style="float: right; padding: 30px; max-width: 30%; min-width: 330px;"}
 
 <br/>
-Hi! I'm Andy, an undergrad Researcher and Engineer at [UC Berkeley](https://www.berkeley.edu) studying Electrical Engineering and Computer Science (EECS). 
+Hey! I'm Richard, a second-year undergrad at [Caltech](https://www.caltech.edu/) studying Computer Science and minoring in Mathematics and Control & Dynamical Systems (CDS). 
 
-My research interests lie in building efficient and intelligent AI agents using Reinforcement Learning and interacting with the world through Robotics.
-Currently, I'm working on offline-to-online RL at [BAIR](https://bair.berkeley.edu) under the [RAIL](https://rail.eecs.berkeley.edu) group. Outside my research, I enjoy building applied machine learning applications within the wonderful community at [Launchpad](https://launchpad.studentorg.berkeley.edu).
+My research interests lie in building efficient and scalable models for solving hard problems in math and robotics, through reinforcement learning and fine-tuning. I'm particularly interested in applications to self-driving vehicles and intelligent robotics, specifically through spatial reasoning, large language models, model predictive control, and perception/vision.
 
-I've also been exploring hardware design/validation and FPGA programming with the Energy Infrastructure team at [Tesla](https://www.tesla.com), and learned PCB design and firmware alongside my friends at [Berkeley Formula Racing](https://fsae.studentorg.berkeley.edu).
+Currently, I'm working frameworks for reinforcement learning from human feedback (RLHF) and LLM fine-tuning to prove Olympiad-level (and beyond) inequalities under [Prof. Tony Yue Yu](https://tyy.caltech.edu/) through [Caltech PMA](https://pma.caltech.edu/). Outside my research, I have taken classes on Deep Learning, LLM's, Optimal Control, Algorithms, and Markov Chains to name a few.
 
-When I'm not in the lab or garage, I spend my time creating art with my oil paints and colored pencils, playing intramural basketball, and searching for new matcha lattes in the bay!
+Last summer, I worked on software development and operations research at [Commerzbank](https://www.commerzbank.de/group/) in New York City. I'll be in Seattle this summer interning at [Amazon Web Services](https://aws.amazon.com/?nc2=h_lg)!
 
-If you'd like to chat, please reach out at [andypeng at berkeley dot edu].
+Outside of school, I'm a runner for Caltech's Cross Country and Track & Field teams. I'm also on the lookout for the best hand-made noodles in SoCal. 
+
+If you'd like to chat, please reach out at [rhoffman at caltech dot edu].
 
 ## Recent News
-last updated: Dec 2024
-- I just released my first ever research paper with BAIR! We explore how to do RL fine-tuning without offline data retention. I'm excited to see how [Warm-start RL (WSRL)](http://arxiv.org/abs/2412.07762) can help scale up RL for real-world tasks, and the future of efficient RL finetuning. (Update: WSRL has been accepted to ICLR 2025!)
+last updated: Mar 2025
+- My dad(Researcher at HRL) and I released a paper, my first one! We explore a novel neural population code method to accurately estimate object orientation. I'm excited to see how [Object-Pose Estimation With Neural Population Codes](https://arxiv.org/abs/2502.13403) can be scaled to enhance robot perception and improve autonomous vehicle driving. 
