@@ -134,13 +134,13 @@ footer:
   links:
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
-      url: https://twitter.com/andy_peng05
+      url: https://twitter.com/
     - label: "LinkedIn"
       icon: "fab fa-linkedin"
-      url: https://www.linkedin.com/in/andypeng05/
+      url: https://www.linkedin.com/in/richardhoffmann04/
     - label: "GitHub"
       icon: "fab fa-fw fa-github"
-      url: https://github.com/andypeng05
+      url: https://github.com/richardhoff88
     # - label: "GitLab"
     #   icon: "fab fa-fw fa-gitlab"
     #   url: 
