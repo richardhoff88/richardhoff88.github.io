@@ -5,16 +5,13 @@ permalink: /
 ---
 
 <style>
-.splash .page__content {
+article.splash .page__content {
   font-size: 1.1rem;
   line-height: 1.6;
 }
 
-.splash .page__content h1 {
-  font-size: 1.2rem;
-}
-
-.splash .page__content h2 {
+article.splash .page__content h1,
+article.splash .page__content h2 {
   font-size: 1.2rem;
 }
 </style>
