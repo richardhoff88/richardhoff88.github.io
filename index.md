@@ -11,7 +11,7 @@ permalink: /
 }
 
 .splash .page__content h1 {
-  font-size: 2.2rem;
+  font-size: 1.2rem;
 }
 
 .splash .page__content h2 {
