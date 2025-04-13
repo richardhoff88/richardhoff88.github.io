@@ -4,6 +4,22 @@ layout: splash
 permalink: /
 ---
 
+<style>
+.splash .page__content {
+  font-size: 1.1rem;
+  line-height: 1.6;
+}
+
+.splash .page__content h1 {
+  font-size: 2.2rem;
+}
+
+.splash .page__content h2 {
+  font-size: 1.2rem;
+}
+</style>
+
+
 ![Richard Hoffmann](./images/richard.jpeg)
 {:style="float: right; padding: 30px; max-width: 20%; min-width: 230px;"}
 
