@@ -27,7 +27,7 @@ My research interests lie in building scalable models for solving hard problems 
 
 Currently, I'm working on frameworks for reinforcement learning from human feedback (RLHF) and LLM fine-tuning to prove Olympiad-level (and beyond) inequalities under [Prof. Tony Yue Yu](https://tyy.caltech.edu/) through [Caltech](https://pma.caltech.edu/).  I've previously worked under [Dr. Alec Reed](https://www.colorado.edu/cs/alec-reed) at CU Boulder's [Autonomous Robotics Lab](https://arpg.github.io/) on predictive vehicle dynamics. Outside my research, I have taken classes on Deep Learning, LLM's, Optimal Control, Algorithms, and Markov Chains.
 
-Last summer, I worked on software development and operations research at [Commerzbank](https://www.commerzbank.de/group/) in New York City. I'll be in Seattle this summer interning at [Amazon Web Services](https://aws.amazon.com/?nc2=h_lg)!
+Last summer, I worked on software development and operations research at [Commerzbank](https://www.commerzbank.de/group/) in New York City. I'll be in Seattle this summer interning at [Amazon](https://aws.amazon.com/?nc2=h_lg)!
 
 If you'd like to chat, please reach out at [rhoffman at caltech dot edu].
 
