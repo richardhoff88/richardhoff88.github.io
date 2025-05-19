@@ -17,7 +17,7 @@ article.splash .page__content h2 {
 </style>
 
 
-![Richard Hoffmann](./images/richard.jpeg)
+![Richard Hoffmann](./images/website.jpg)
 {:style="float: right; padding: 30px; max-width: 20%; min-width: 230px;"}
 
 <br/>
