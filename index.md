@@ -18,7 +18,7 @@ article.splash .page__content h2 {
 
 
 ![Richard Hoffmann](website.JPG)
-{:style="float: right; padding: 30px; max-width: 20%; min-width: 270px;"}
+{:style="float: right; padding: 30px; max-width: 30%; min-width: 270px;"}
 
 <br/>
 Hey! I'm Richard, a second-year undergrad at [Caltech](https://www.caltech.edu/) studying Computer Science and minoring in Mathematics and Control & Dynamical Systems (CDS). 
