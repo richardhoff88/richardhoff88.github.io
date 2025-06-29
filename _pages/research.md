@@ -78,7 +78,7 @@ During my undergrad I was advised by professors [George Konidaris](https://cs.br
                 <span class="skill">population code</span>
               </div>
               <a href="https://heikohoffmann.de/">Heiko Hoffmann</a>,
-              <strong>Richard Hoffmann</strong>,
+              <strong>Richard Hoffmann</strong>
               <br>
 				<em>arXiv preprint</em>, 2025
               <br>
