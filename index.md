@@ -34,5 +34,9 @@ Last summer, I worked on software development and operations research at [Commer
 If you'd like to chat, please reach out at rhoffman@caltech.edu.
 
 ## Recent News
-last updated: Mar 2025
+last updated: June 2025
+
+- Adversarial attacks on stochastic bandits often rely on unrealistic assumptions like unrestricted, per-round reward manipulation. We introduce a more practical threat model, Fake Data Injection, where the attacker injects a limited number of bounded fake feedback samples. We demonstrate both theoretically and empirically that [Practical Adversarial Attacks on Stochastic Bandits via Fake Data Injection
+](https://arxiv.org/abs/2505.21938) can effectively mislead popular algorithms like UCB and Thompson Sampling with minimal attack cost.
+
 - We explore a novel neural population code method to accurately estimate object orientation. I'm excited to see how [Object-Pose Estimation With Neural Population Codes](https://arxiv.org/abs/2502.13403) can be scaled to enhance robot perception and improve autonomous vehicle driving. 

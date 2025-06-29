@@ -23,6 +23,44 @@ During my undergrad I was advised by professors [George Konidaris](https://cs.br
 ### Preprints
 
 <table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
+    <tbody>
+      <tr>
+        <td style="padding:20px;width:25%;vertical-align:middle">
+          <div>
+            <img src='/images/paper-images/fdi-bandits.pdf' width="280">
+          </div>
+        </td>
+        <td style="padding:20px;width:75%;vertical-align:middle">
+          <p style="font-family:'Lato',Verdana,Helvetica,sans-serif; font-size:14px;font-weight:700">
+          Practical Adversarial Attacks on Stochastic Bandits via Fake Data Injection
+          </p>
+          <div class="skills">
+            <span class="skill">adversarial learning</span>
+            <span class="skill">bandits</span>
+            <span class="skill">online learning</span>
+          </div>
+          <a href="https://qirunzeng.github.io/">Qirun Zeng</a>,
+          <a href="https://www.linkedin.com/in/eric-he-bb30a4302/">Eric He</a>,
+          <strong>Richard Hoffmann</strong>,
+          <a href="https://xuchuangw.com/">Xuchuang Wang</a>,
+          <a href="https://jhzuo.github.io/">Jinhang Zuo</a>
+          <br>
+          <em>arXiv preprint</em>, 2025
+          <br>
+          [<a href="https://arxiv.org/abs/2505.21938">paper</a>]
+          [<a href="/fdi-bandits/">website</a>]
+          [<a href="https://github.com/richardhoff88/online_learning_torank">code</a>]
+          <br>
+          <p>
+          Existing bandit attack models rely on unrealistic assumptions like unrestricted reward manipulation. We propose <b>*Fake Data Injection*</b>, a practical threat model where attackers inject bounded fake feedback to mislead UCB and Thompson Sampling with sublinear effort, exposing real-world vulnerabilities in stochastic bandit algorithms.
+          </p>
+        </td>
+      </tr>
+    </tbody>
+</table>
+
+
+<table style="width:100%;border:0px;border-spacing:0px;border-collapse:separate;margin-right:auto;margin-left:auto;">
         <tbody>
           <!-- <tr bgcolor="#ffffd0"> -->
           <tr>
