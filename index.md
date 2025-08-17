@@ -14,6 +14,12 @@ article.splash .page__content h1,
 article.splash .page__content h2 {
   font-size: 1.2rem;
 }
+.bio-text {
+  max-width: 65%;
+  text-align: justify;
+  word-wrap: break-word;
+  hyphens: auto;
+}
 .social-links {
   float: right; 
   clear: right;
@@ -22,11 +28,11 @@ article.splash .page__content h2 {
   min-width: 270px; 
   width: 50%;
   text-align: center;
-  font-size: 0.6rem;
+  font-size: 0.5rem;
 }
 .social-links a {
   text-decoration: none;
-  color: #0c6ed1ff;
+  color: #6eebebff;
   margin: 0 2px;
 }
 .social-links a:hover {
@@ -51,6 +57,7 @@ article.splash .page__content h2 {
 {:style="float: right; padding: 30px; max-width: 30%; min-width: 270px;"} -->
 
 <br/>
+<div class="bio-text">
 Hey! I'm Richard, a second-year undergrad at [Caltech](https://www.caltech.edu/) studying Computer Science and minoring in Mathematics and Control & Dynamical Systems (CDS). 
 
 My interest is in building scalable models for solving hard problems. I'm particularly interested in applications to self-driving vehicles and intelligent robotics, specifically through spatial reasoning, large language models, model predictive control, and perception/vision.
@@ -60,6 +67,7 @@ Currently, I'm improving VLM reasoning and spatial awareness in [Glab](https://g
 Last summer, I worked on software development and operations research at [Commerzbank](https://www.commerzbank.de/group/) in New York City. I'm in Seattle this summer interning at [Amazon](https://aws.amazon.com/?nc2=h_lg)!
 
 If you'd like to chat, please reach out at rhoffman@caltech.edu.
+</div>
 
 ## Recent News
 last updated: June 2025
