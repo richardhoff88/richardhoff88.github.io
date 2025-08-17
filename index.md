@@ -14,10 +14,36 @@ article.splash .page__content h1,
 article.splash .page__content h2 {
   font-size: 1.2rem;
 }
+.social-links {
+  float: right; 
+  clear: right;
+  padding: 0px 30px 30px 30px;
+  max-width: 30%; 
+  min-width: 270px; 
+  width: 50%;
+  text-align: center;
+  font-size: 0.9rem;
+}
+.social-links a {
+  text-decoration: none;
+  color: #0066cc;
+  margin: 0 2px;
+}
+.social-links a:hover {
+  text-decoration: underline;
+}
 </style>
-
 <img src="website.JPG" alt="Richard Hoffmann" 
-     style="float: right; padding: 30px; max-width: 30%; min-width: 270px; width: 50%; height: auto; border-radius: 50px;" />
+     style="float: right; padding: 30px 30px 0px 30px; max-width: 30%; min-width: 270px; width: 50%; height: auto; border-radius: 50px;" />
+
+<div class="social-links">
+<a href="mailto:rhoffman@caltech.edu">Email</a> / 
+<!-- <a href="#">Resume</a> /  -->
+<a href="https://scholar.google.com/citations?user=upWNj64AAAAJ&hl=en">Google Scholar</a> / 
+<a href="#">Twitter</a> / 
+<a href="https://www.linkedin.com/in/richard-hoffmann-27175a22a/">LinkedIn</a> / 
+<a href="https://github.com/richardhoff88">Github</a>
+</div>
 
 
 
