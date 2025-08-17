@@ -22,11 +22,11 @@ article.splash .page__content h2 {
   min-width: 270px; 
   width: 50%;
   text-align: center;
-  font-size: 0.9rem;
+  font-size: 0.6rem;
 }
 .social-links a {
   text-decoration: none;
-  color: #0066cc;
+  color: #0c6ed1ff;
   margin: 0 2px;
 }
 .social-links a:hover {
