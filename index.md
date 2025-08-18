@@ -22,7 +22,7 @@ article.splash .page__content h2 {
   min-width: 270px; 
   width: 50%;
   text-align: center;
-  font-size: 0.5rem;
+  font-size: 0.53rem;
 }
 .social-links a {
   text-decoration: none;
