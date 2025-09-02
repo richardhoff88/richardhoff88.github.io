@@ -51,11 +51,11 @@ article.splash .page__content h2 {
 {:style="float: right; padding: 30px; max-width: 30%; min-width: 270px;"} -->
 
 <br/>
-Hey! I'm Richard, a second-year undergrad at [Caltech](https://www.caltech.edu/) studying Computer Science and minoring in Mathematics and Control & Dynamical Systems (CDS). 
+Hey! I'm Richard, a second-year undergrad at [Caltech](https://www.caltech.edu/) studying Computer Science and minoring in Mathematics and Control & Dynamical Systems (CDS). I'm advised by [Prof. Adam Wierman](https://www.cms.caltech.edu/people/adamw).
 
 My interest is in building scalable models for solving hard problems. I'm particularly interested in applications to self-driving vehicles and intelligent robotics, specifically through spatial reasoning, large language models, model predictive control, and perception/vision.
 
-Currently, I'm improving VLM reasoning and spatial awareness in [Glab](https://gkioxari.github.io/). I'm also working on LLM pre and post-training to prove Olympiad-level (and beyond) inequalities under [Prof. Tony Yue Yu](https://tyy.caltech.edu/) at [Caltech](https://pma.caltech.edu/). I've previously worked under [Dr. Alec Reed](https://www.colorado.edu/cs/alec-reed) at CU Boulder's [Autonomous Robotics Lab](https://arpg.github.io/) on predictive vehicle dynamics.
+Currently, I'm working on LLM pre and post-training to prove Olympiad-level (and beyond) inequalities under [Prof. Tony Yue Yu](https://tyy.caltech.edu/) at [Caltech](https://pma.caltech.edu/). I've previously worked under [Dr. Alec Reed](https://www.colorado.edu/cs/alec-reed) at CU Boulder's [Autonomous Robotics Lab](https://arpg.github.io/) on predictive vehicle dynamics.
 
 Last summer, I worked on software development and operations research at [Commerzbank](https://www.commerzbank.de/group/) in New York City. I'm in Seattle this summer interning at [Amazon](https://aws.amazon.com/?nc2=h_lg)!
 
