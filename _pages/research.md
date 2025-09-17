@@ -27,7 +27,7 @@ During my undergrad I was advised by professors [George Konidaris](https://cs.br
       <tr>
         <td style="padding:20px;width:25%;vertical-align:middle">
           <div>
-            <img src='/images/paper-images/fdi-bandits.pdf' width="280">
+            <img src='/images/paper-images/mab.png' width="280">
           </div>
         </td>
         <td style="padding:20px;width:75%;vertical-align:middle">
