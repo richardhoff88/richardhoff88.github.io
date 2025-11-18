@@ -22,6 +22,9 @@ latest_posts:
   enabled: false
   scrollable: true # adds a vertical scroll bar if there are more than 3 new posts items
   limit: 3 # leave blank to include all the blog posts
+
+selected_papers: true
+
 ---
 
 Hey! I'm Richard, a third-year undergrad at [Caltech](https://www.caltech.edu/) studying Computer Science and minoring in Control & Dynamical Systems (CDS). I'm advised by [Prof. Adam Wierman](https://www.cms.caltech.edu/people/adamw).
