@@ -7,7 +7,6 @@ first_name: Richard
 middle_name: 
 last_name: Hoffmann
 contact_note: >
-  You can even add a little note about which of these is the best way to reach you.
 description: > # the ">" symbol means to ignore newlines until "footer_text:"
   Hi! I'm Richard Hoffmann, an undergraduate at Caltech. Welcome to my website!
 footer_text: >
