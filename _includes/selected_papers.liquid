@@ -1,3 +1,65 @@
 <div class="publications">
-  {% bibliography --group_by none --query @*[selected=true]* %}
+  {% bibliography --group_by none --query @*[selected=true]* --template bib_template %}
 </div>
+
+<script>
+  // Add arxiv and code buttons to each selected paper
+  document.addEventListener('DOMContentLoaded', function() {
+    const papers = document.querySelectorAll('.publications .bibtex-entry');
+    papers.forEach(paper => {
+      const title = paper.querySelector('.title');
+      if (title) {
+        const links = paper.querySelector('.links');
+        if (!links) {
+          const linksDiv = document.createElement('div');
+          linksDiv.className = 'links';
+          
+          // Add arXiv button if arxiv field exists
+          const arxivLink = paper.querySelector('a[href*="arxiv.org"]');
+          if (arxivLink) {
+            const arxivBtn = document.createElement('a');
+            arxivBtn.href = arxivLink.href;
+            arxivBtn.className = 'btn btn-sm z-depth-0';
+            arxivBtn.innerHTML = '<i class="ai ai-arxiv"></i> arXiv';
+            arxivBtn.target = '_blank';
+            linksDiv.appendChild(arxivBtn);
+            linksDiv.appendChild(document.createTextNode(' '));
+          }
+
+          // Add code button if code field exists
+          const codeLink = paper.querySelector('a[href*="github.com"]') || 
+                          paper.querySelector('a[href*="gitlab.com"]') ||
+                          paper.querySelector('a[href*="bitbucket.org"]');
+          if (codeLink) {
+            const codeBtn = document.createElement('a');
+            codeBtn.href = codeLink.href;
+            codeBtn.className = 'btn btn-sm z-depth-0';
+            codeBtn.innerHTML = '<i class="fab fa-github"></i> Code';
+            codeBtn.target = '_blank';
+            linksDiv.appendChild(codeBtn);
+          }
+
+          if (linksDiv.children.length > 0) {
+            paper.insertBefore(linksDiv, title.nextSibling);
+          }
+        }
+      }
+    });
+  });
+</script>
+
+<style>
+  .publications .links {
+    margin: 0.5rem 0;
+  }
+  .publications .btn {
+    margin-right: 0.25rem;
+    margin-bottom: 0.25rem;
+    color: #fff;
+    background-color: var(--global-theme-color);
+  }
+  .publications .btn:hover {
+    color: #fff;
+    background-color: var(--global-hover-color);
+  }
+</style>
