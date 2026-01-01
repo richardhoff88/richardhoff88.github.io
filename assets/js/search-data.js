@@ -16,7 +16,25 @@ ninja.data = [{
           handler: () => {
             window.location.href = "/publications/";
           },
-        },{id: "post-a-post-with-plotly-js",
+        },{id: "nav-blog",
+          title: "Blog",
+          description: "",
+          section: "Navigation",
+          handler: () => {
+            window.location.href = "/blog/";
+          },
+        },{id: "post-pontryagin-s-maximum-principle-intuitively",
+        
+          title: "Pontryagin’s Maximum Principle, Intuitively",
+        
+        description: "An intuitive walkthrough of optimal control and Pontryagin’s Maximum Principle",
+        section: "Posts",
+        handler: () => {
+          
+            window.location.href = "/blog/2025/pontryagin_blog/";
+          
+        },
+      },{id: "post-a-post-with-plotly-js",
         
           title: "a post with plotly.js",
         
