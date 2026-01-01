@@ -4,7 +4,7 @@ title: "Pontryagin’s Maximum Principle, Intuitively"
 date: 2025-12-31 21:15:00
 description: An intuitive walkthrough of optimal control and Pontryagin’s Maximum Principle
 image: /assets/img/control_blog/optimizationhamiltonian.png
-tags: Control Theory
+tags: optimal_control
 categories: blogs
 toc:
   sidebar: left
