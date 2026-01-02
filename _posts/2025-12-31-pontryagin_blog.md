@@ -45,7 +45,7 @@ $$
 - $u$ is the control  
 - $f$ is a known function representing the dynamics  
 
-**What's the goal?** In optimal control we want to find a control function $u^*$ (usually $*$ denotes optimality) such that the trajectory $(x^*(t), u^*(t))$ across the time interval minimizes some performance measure which we can call $C(x,u)$. Again, this can be minimizing cost or deviation from a pre-determined goal.
+**What's the goal?** In optimal control we want to find a control function $u^*$ such that the trajectory $(x^*(t), u^*(t))$ across the time interval minimizes some performance measure which we can call $C(x,u)$. Again, this can be minimizing cost or deviation from a pre-determined goal.
 
 $$
 C(x,u) = q_T(x(t_f), t_f)+ \int_0^{t_f} g(x(t), u(t))\,dt
