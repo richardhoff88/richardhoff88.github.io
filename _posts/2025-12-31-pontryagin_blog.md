@@ -6,6 +6,7 @@ description: An intuitive walkthrough of optimal control and Pontryagin’s Maxi
 image: /assets/img/control_blog/optimus.jpg
 tags: optimal_control
 categories: blogs
+published: false
 toc:
   sidebar: left
 ---
