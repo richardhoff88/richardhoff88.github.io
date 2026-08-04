@@ -27,10 +27,10 @@ selected_papers: true
 
 ---
 
-Hey! I'm Richard, a third-year undergrad at [Caltech](https://www.caltech.edu/) studying Computer Science and minoring in Control & Dynamical Systems. I'm fortunate to be advised by [Prof. Adam Wierman](https://www.cms.caltech.edu/people/adamw).
+Hey! I'm Richard, a fourth-year undergrad at [Caltech](https://www.caltech.edu/) studying Computer Science. I'm advised by [Prof. Adam Wierman](https://www.cms.caltech.edu/people/adamw).
 
 
-My research interest covers a mix of reinforcement learning, control-theory, generative modeling, and spatial intelligence. I'm excited about [**multi-agent RL**](https://en.wikipedia.org/wiki/Multi-agent_reinforcement_learning), specifically how intelligence emerges from interacting populations. I'm also interested in generalizing robot learning and planning via [**video world models**](https://www.boyuan.space/large-video-planner/).
+My research interests cover a mix of reinforcement learning, control-theory, generative modeling, and spatial intelligence. I'm excited about [**multi-agent RL**](https://en.wikipedia.org/wiki/Multi-agent_reinforcement_learning), specifically how intelligence emerges from interacting populations. I'm also interested in generalizing robot learning and planning via [**video world models**](https://www.boyuan.space/large-video-planner/), where I work with [Yilun Du's](https://yilundu.github.io/) [Embodied Minds](https://embodied-minds-lab.github.io/) group.
 
 
 Before, I worked on post-training with [Prof. Tony Yue Yu](https://tyy.caltech.edu/) at [Caltech](https://pma.caltech.edu/), and before that on predictive vehicle dynamics under [Dr. Alec Reed](https://www.colorado.edu/cs/alec-reed) at CU Boulder's [Autonomous Robotics Lab](https://arpg.github.io/). I've interned at [Amazon AWS](https://aws.amazon.com/?nc2=h_lg) in Seattle and [Commerzbank](https://www.commerzbank.de/group/) in New York City. 
