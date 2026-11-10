@@ -34,6 +34,10 @@ li::marker { color: var(--accent); }
 var { font-family: var(--serif); font-style: italic; }
 .box { background: var(--accent-soft); border-radius: 6px; padding: 14px 20px 2px; margin: 24px 0; }
 .box .label { font-size: 11px; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); margin-bottom: 4px; }
+.eq { text-align: center; font-size: 18px; margin: 14px 0; overflow-x: auto; padding: 2px 0; font-family: var(--serif); font-variant-numeric: lining-nums; }
+p var, li var, figcaption var { font-variant-numeric: lining-nums; }
+.eq .tag { float: right; font-family: inherit; color: var(--muted); font-size: 15px; }
+h3 { font-size: 18px; font-weight: 600; margin: 28px 0 8px; }
 figure { margin: 28px 0; }
 figcaption { font-size: 14px; line-height: 1.5; color: var(--muted); margin-top: 9px; }
 figcaption b { color: var(--fg); font-weight: 600; }
@@ -66,10 +70,6 @@ svg.plot { width: 100%; height: auto; display: block; font-family: "Gill Sans", 
 input[type=range] { width: 100%; margin: 0; accent-color: var(--accent); }
 .readout { font-variant-numeric: tabular-nums; font-size: 13px; color: var(--muted); line-height: 1.5; }
 .readout b { color: var(--fg); font-weight: 600; }
-.chartbox { margin-top: 12px; background: var(--card); border: 1px solid var(--rule); border-radius: 6px; padding: 12px; }
-.chartbox h3 { font-size: 15px; margin: 0 0 6px; font-weight: 600; }
-.legend { display: flex; gap: 6px 14px; flex-wrap: wrap; color: var(--muted); font-size: 13px; margin-bottom: 4px; }
-.legend i { display: inline-block; width: 18px; height: 0; border-top: 2px solid; vertical-align: middle; margin-right: 5px; }
 details { margin-top: 12px; color: var(--muted); font-size: 14px; }
 summary { cursor: pointer; color: var(--accent); }
 details p { margin: 10px 0 0; }
@@ -94,11 +94,32 @@ details p { margin: 10px 0 0; }
 <p>AnchorLock uses that draft as an <em>anchor</em>. It is a small change to the sampler. It needs no training, no verifier, and no second model. This page walks through the idea, then lets you watch it work on one episode.</p>
 
 <h2>The idea</h2>
-<p>Start from one noise sample. First, run only two denoising steps and decode the result: this is the <b>anchor</b>. It is blurry, but it keeps the coarse story of the video. Then run the normal 30-step sampler from the same noise. At each early step, while the noise level <var>&sigma;</var> is high, the model predicts a clean video <var>x&#770;</var><sub>0</sub>. AnchorLock moves that prediction part of the way toward a coarse version of the anchor, an average over blocks of about 160 pixels, so only the large-scale layout is pulled. The pull is full strength down to <var>&sigma;</var> = 0.8, fades to zero by <var>&sigma;</var> = 0.7, and from then on the sampler runs unaided. The detail is the model's own.</p>
+<p>Start from one noise sample. First, run only two denoising steps and decode the result: this is the <b>anchor</b>. It is blurry, but it keeps the coarse story of the video. Then run the normal 30-step sampler from the same noise. At each early step, while the noise level <var>&sigma;</var> is high, the sampler asks the model for a clean video. AnchorLock moves that clean video part of the way toward a coarse version of the anchor, so only the large-scale layout is pulled. The pull fades out as the noise falls, and from then on the sampler runs unaided. The detail is the model's own.</p>
 <p>The anchor only costs two extra denoising steps out of thirty, on the same noise.</p>
 
+<h2>The math</h2>
+<h3>Baseline sampler</h3>
+<p>LTX-2.3 is a rectified-flow model: a noisy video at noise level <var>&sigma;</var> is <var>x</var><sub><var>&sigma;</var></sub> = (1 &minus; <var>&sigma;</var>)&thinsp;<var>x</var><sub>0</sub> + <var>&sigma;</var>&thinsp;<var>&epsilon;</var>, where <var>x</var><sub>0</sub> is the clean video and <var>&epsilon;</var> is Gaussian noise. Sampling starts at <var>&sigma;</var><sub>0</sub> = 1 with <var>x</var><sub><var>&sigma;</var>=1</sub> = <var>&epsilon;</var> and walks down a schedule <var>&sigma;</var><sub>0</sub> &gt; <var>&sigma;</var><sub>1</sub> &gt; &hellip; &gt; <var>&sigma;</var><sub>30</sub> = 0. At each step the model predicts the clean video, and an Euler step moves the sample toward it:</p>
+<div class="eq"><var>x&#770;</var><sub>0</sub> = <var>D</var><sub><var>&theta;</var></sub>(<var>x</var><sub><var>&sigma;</var></sub>, <var>&sigma;</var>, <var>c</var>)</div>
+<div class="eq"><var>x</var><sub><var>&sigma;</var>&prime;</sub> = <var>x</var><sub><var>&sigma;</var></sub> + (<var>&sigma;</var>&prime; &minus; <var>&sigma;</var>)&thinsp;<span style="white-space:nowrap">(<var>x</var><sub><var>&sigma;</var></sub> &minus; <var>x&#770;</var><sub>0</sub>) / <var>&sigma;</var></span> = <span style="white-space:nowrap"><var>&sigma;</var>&prime;/<var>&sigma;</var> &middot; <var>x</var><sub><var>&sigma;</var></sub> + (1 &minus; <var>&sigma;</var>&prime;/<var>&sigma;</var>) &middot; <var>x&#770;</var><sub>0</sub></span></div>
+<p>Here <var>c</var> is the conditioning (the first frames and the prompt) and <var>&sigma;</var>&prime; is the next noise level. The second form shows what the step does: it keeps a fraction <var>&sigma;</var>&prime;/<var>&sigma;</var> of the current sample and fills in the rest from the model's clean estimate <var>x&#770;</var><sub>0</sub>. Whatever <var>x&#770;</var><sub>0</sub> says about the scene at high noise, such as where a ball goes, is what the sample then commits to.</p>
+
+<h3>With AnchorLock</h3>
+<p>Run the same recipe for two steps (<var>&sigma;</var> = 1 &rarr; 0.1 &rarr; 0) from the same noise <var>&epsilon;</var>, and call its clean estimate <var>A</var>. Let <var>P</var> be an average over blocks of 5&times;5 latent tokens (about 160 pixels), applied to each frame separately, with no mixing across time. The sampler is unchanged except that the clean estimate is corrected before the Euler step:</p>
+<div class="eq"><var>x&#771;</var><sub>0</sub> = <var>x&#770;</var><sub>0</sub> + <var>w</var>(<var>&sigma;</var>)&thinsp;(<var>PA</var> &minus; <var>Px&#770;</var><sub>0</sub>)</div>
+<div class="eq"><var>x</var><sub><var>&sigma;</var>&prime;</sub> = <span style="white-space:nowrap"><var>&sigma;</var>&prime;/<var>&sigma;</var> &middot; <var>x</var><sub><var>&sigma;</var></sub> + (1 &minus; <var>&sigma;</var>&prime;/<var>&sigma;</var>) &middot; <var>x&#771;</var><sub>0</sub></span></div>
+<div class="eq"><var>w</var>(<var>&sigma;</var>) = <var>g</var><sub>0</sub> &nbsp;for&nbsp; <var>&sigma;</var> &ge; <var>&sigma;</var><sub>hi</sub>; &nbsp; <var>g</var><sub>0</sub>&thinsp;(<var>&sigma;</var> &minus; <var>&sigma;</var><sub>lo</sub>)/(<var>&sigma;</var><sub>hi</sub> &minus; <var>&sigma;</var><sub>lo</sub>) &nbsp;in between; &nbsp; 0 &nbsp;for&nbsp; <var>&sigma;</var> &le; <var>&sigma;</var><sub>lo</sub></div>
+<p>The settings used here are <var>g</var><sub>0</sub> = 0.9, <var>&sigma;</var><sub>hi</sub> = 0.8 and <var>&sigma;</var><sub>lo</sub> = 0.7, so the pull is on for the first part of the run and has faded out by the time the noise reaches 0.7. Because <var>P</var> is an average, the correction only touches the coarse part of the video: <var>Px&#771;</var><sub>0</sub> = (1 &minus; <var>w</var>)&thinsp;<var>Px&#770;</var><sub>0</sub> + <var>w</var>&thinsp;<var>PA</var>, while the detail <var>x&#770;</var><sub>0</sub> &minus; <var>Px&#770;</var><sub>0</sub> is left as the model produced it. With <var>w</var> = 0 this is exactly the baseline sampler.</p>
+
+<h3>What the slider plots</h3>
+<p>The right-hand panel below is a measurement on the clean estimate at each step. At step <var>i</var>, take <var>x&#770;</var><sub>0</sub> (baseline sampler) or <var>x&#771;</var><sub>0</sub> (AnchorLock sampler), decode it to video, and ask how strongly a ball is in frame <var>t</var>. Call that <var>m</var><sub><var>i</var></sub>(<var>t</var>), and normalize it to a distribution over time:</p>
+<div class="eq"><var>c</var><sub><var>i</var></sub>(<var>t</var>) = <var>m</var><sub><var>i</var></sub>(<var>t</var>) / &sum;<sub><var>t</var>&prime;</sub> <var>m</var><sub><var>i</var></sub>(<var>t</var>&prime;)</div>
+<p>The slider moves <var>i</var> from 1 to 30, so you are watching how the model's belief about <em>when the ball is moving</em> changes as the noise falls. The dashed curve is the same measurement on the anchor. The readout under the slider gives the <b>second-pass share</b>, the part of the curve after 5 s:</p>
+<div class="eq"><var>s</var><sub><var>i</var></sub> = &sum;<sub><var>t</var> &gt; 5&thinsp;s</sub> <var>c</var><sub><var>i</var></sub>(<var>t</var>)</div>
+<p>In this episode the first pass is over by about 4 s, so any mass after 5 s is the second ball. <var>s</var><sub><var>i</var></sub> = 0 means only the first ball.</p>
+
 <h2>One episode, up close</h2>
-<p>The figure below is Physics-IQ episode 0022: a grey tennis ball rolls out of a pipe, left to right. For each video I measure when a ball is moving on screen, and draw it as a filled curve over time (area = 1), so two passes show up as two peaks. The baseline video has two: the ball rolls out, and a second ball comes back. The anchor has one. Drag the slider to see, step by step, the sampler's own estimate of the final video; the dashed blue curve is the anchor's.</p>
+<p>The figure below is Physics-IQ episode 0022: a grey tennis ball rolls out of a pipe, left to right. For each video I measure when a ball is moving on screen, and draw it as a filled curve over time (area = 1), so two passes show up as two peaks. The baseline video has two: the ball rolls out, and a second ball comes back. The anchor has one. Drag the slider to see, step by step, the measurement <var>c</var><sub><var>i</var></sub> from the section above; the dashed blue curve is the anchor's.</p>
 
 <figure class="wide">
 <div id="fig">
@@ -131,17 +152,11 @@ details p { margin: 10px 0 0; }
       </div>
     </section>
   </div>
-  <div class="chartbox">
-    <h3>How much of the ball distribution falls in a second pass (after 5 s), step by step</h3>
-    <div class="legend"><span><i style="border-color:var(--base)"></i>baseline sampler</span><span><i style="border-color:var(--lock)"></i>with AnchorLock</span><span><i style="border-color:var(--muted);border-top-style:dashed"></i>finished baseline video</span><span><i style="border-color:var(--anchor)"></i>anchor</span></div>
-    <svg class="plot" id="chart" viewBox="0 0 900 230" role="img" aria-label="Share of the ball distribution in a second pass against denoising step"></svg>
-  </div>
 </div>
-<figcaption><b>What it shows.</b> In the baseline sampler the second peak appears in the model's own estimate at <var>&sigma;</var> &asymp; 0.88 and stays to the end: 44% of the finished video's ball distribution falls after 5 s. With AnchorLock that peak never forms; the finished video has 0%. I chose this episode because the effect is easy to see, not because it is typical. Early estimates (<var>&sigma;</var> near 1) are blurry and spiky, so don't over-read them. One seed, one episode.</figcaption>
+<figcaption><b>What it shows.</b> In the baseline sampler the second peak appears in the model's own estimate at <var>&sigma;</var> &asymp; 0.88 and stays to the end: <var>s</var> is 44% for the finished video. With AnchorLock that peak never forms, and <var>s</var> is 0% for the finished video. I chose this episode because the effect is easy to see, not because it is typical. Early estimates (<var>&sigma;</var> near 1) are blurry and spiky, so don't over-read them. One seed, one episode.</figcaption>
 <details><summary>How to read this</summary>
   <p><b>Distribution.</b> For every frame after the lead-in, how strongly a ball is in view: the strongest difference from the empty room (a high-pass difference from the anchor's empty-table background, minus what is there in most frames, ignoring the picture border and a small floor). It is smoothed and scaled to area 1. Finished videos use every frame; the sampler's estimate uses the frames saved by the trace job, interpolated to the same grid. All panels share one vertical scale, and a very tall peak is clipped rather than squashing the rest.</p>
   <p><b>Right panel.</b> At each step the model predicts a clean video. &ldquo;Baseline sampler&rdquo; is that prediction with nothing steering it. &ldquo;With AnchorLock&rdquo; is the prediction after the steering update, which is what the sampler continues from. Steering is applied while the lock is on (green band); afterwards the sampler runs on its own.</p>
-  <p><b>Second-pass share.</b> The part of the distribution that falls after 5 s, when the first pass is over and, in the baseline, the returning ball appears. 0% means only the first ball.</p>
 </details>
 </figure>
 
@@ -207,22 +222,10 @@ function render() {
   $('rdot').style.background = COL[mode];
   $('rcap').textContent = mode === 'base' ? 'What the model predicts when nothing steers it. The second peak takes shape as the noise falls, and the curve stays away from the dashed anchor curve.'
                                           : 'What the sampler continues from once steering has pulled the prediction toward the anchor. The curve follows the dashed anchor curve.';
-  chart();
 }
 function band() {
   const s = tr.lock; if (!s) return; const n = s.w.length; let a = -1, b = -1; s.w.forEach((w, i) => { if (w > 0) { if (a < 0) a = i; b = i; } }); if (a < 0) return;
   const f = i => (i + 0.5) / n * 100; $('band').style.left = f(a) + '%'; $('band').style.width = (f(b) - f(a)) + '%'; $('bandlab').style.left = f(a) + '%'; $('bandlab').textContent = 'steering on';
-}
-function chart() {
-  const Wd = 900, Ht = 230, Lc = 44, Rc = 14, Tt = 12, Bc = 32, pr = tr.base, lk = tr.lock; if (!pr && !lk) return;
-  const n = (pr || lk).c.length, xs = i => Lc + i / (n - 1) * (Wd - Lc - Rc), ys = v => Tt + (1 - v) * (Ht - Tt - Bc); let h = '';
-  [0, 0.25, 0.5, 0.75, 1].forEach(v => h += `<line x1="${Lc}" x2="${Wd - Rc}" y1="${ys(v)}" y2="${ys(v)}" stroke="#e2dccb"/><text x="${Lc - 8}" y="${ys(v) + 4}" text-anchor="end" fill="#6b6657" font-size="11">${v}</text>`);
-  const sg = (pr || lk).sigma; [0, Math.round(n / 3), Math.round(2 * n / 3), n - 1].forEach(i => h += `<text x="${xs(i)}" y="${Ht - 10}" text-anchor="middle" fill="#6b6657" font-size="11">step ${i + 1} · σ ${sg[i].toFixed(2)}</text>`);
-  h += `<line x1="${Lc}" x2="${Wd - Rc}" y1="${ys(D.late_final.baseline)}" y2="${ys(D.late_final.baseline)}" stroke="#6b6657" stroke-dasharray="4 4"/><line x1="${Lc}" x2="${Wd - Rc}" y1="${ys(D.late_final.anchor)}" y2="${ys(D.late_final.anchor)}" stroke="#234f87" stroke-opacity=".7"/>`;
-  const path = (arr, col) => `<polyline fill="none" stroke="${col}" stroke-width="2.4" stroke-linejoin="round" points="${arr.map((v, i) => xs(i) + ',' + ys(v)).join(' ')}"/>`;
-  if (pr) h += path(pr.tv, COL.base); if (lk) h += path(lk.tv, COL.lock);
-  const sel = tr[mode]; h += `<line x1="${xs(step)}" x2="${xs(step)}" y1="${Tt}" y2="${Ht - Bc}" stroke="#222222" stroke-opacity=".5"/><circle cx="${xs(step)}" cy="${ys(sel.tv[step])}" r="5" fill="${COL[mode]}" stroke="#faf8f2" stroke-width="2"/>`;
-  $('chart').innerHTML = h;
 }
 function setMode(m) { if (!tr[m]) return; mode = m; $('mBase').setAttribute('aria-pressed', m === 'base'); $('mLock').setAttribute('aria-pressed', m === 'lock'); render(); }
 $('mBase').onclick = () => setMode('base'); $('mLock').onclick = () => setMode('lock');
