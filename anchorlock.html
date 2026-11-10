@@ -39,16 +39,23 @@ p var, li var, figcaption var { font-variant-numeric: lining-nums; }
 .eq .tag { float: right; font-family: inherit; color: var(--muted); font-size: 15px; }
 h3 { font-size: 18px; font-weight: 600; margin: 28px 0 8px; }
 figure { margin: 28px 0; }
+.legend { display: flex; gap: 2px 14px; flex-wrap: wrap; color: var(--muted); font-size: 12.5px; margin: 0 0 4px; }
+.legend i { display: inline-block; width: 18px; height: 0; border-top: 2.5px solid; vertical-align: middle; margin-right: 5px; }
+.eqbox { margin-top: 10px; padding: 8px 10px; background: var(--accent-soft); border-radius: 6px; font-size: 13px; line-height: 1.5; }
+.eqbox .eqline { font-family: var(--serif); font-size: 15px; font-variant-numeric: lining-nums; overflow-x: auto; white-space: nowrap; padding: 1px 0; }
+.eqbox .eqnote { color: var(--muted); font-size: 12.5px; margin-top: 3px; }
+.eqbox .eqnote b { color: var(--fg); font-weight: 600; }
+var.b { color: var(--base); } var.l { color: var(--lock); } var.a { color: var(--anchor); }
 figcaption { font-size: 14px; line-height: 1.5; color: var(--muted); margin-top: 9px; }
 figcaption b { color: var(--fg); font-weight: 600; }
-.wide { width: min(920px, calc(100vw - 48px)); position: relative; left: 50%; transform: translateX(-50%); }
+.wide { width: min(1120px, calc(100vw - 48px)); position: relative; left: 50%; transform: translateX(-50%); }
 @media (max-width: 520px) { .wide { width: calc(100vw - 40px); } }
 
 /* interactive figure */
 .stats { display: flex; gap: 6px 26px; flex-wrap: wrap; margin: 0 0 14px; }
 .stat .n { font-size: 24px; font-weight: 600; font-variant-numeric: tabular-nums; line-height: 1.2; }
 .stat .l { color: var(--muted); font-size: 13px; }
-.grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px; }
+.grid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1.4fr); gap: 12px; align-items: start; }
 @media (max-width: 880px) { .grid { grid-template-columns: minmax(0, 1fr); } }
 .card { background: var(--card); border: 1px solid var(--rule); border-radius: 6px; padding: 12px; min-width: 0; }
 .card h3 { font-size: 15px; margin: 0 0 2px; font-weight: 600; display: flex; gap: 8px; align-items: baseline; flex-wrap: wrap; }
@@ -138,7 +145,9 @@ details p { margin: 10px 0 0; }
     <section class="card">
       <h3><span class="dot" id="rdot" style="background:var(--base)"></span><span id="rtitle">Sampler estimate</span> <small>at the chosen step</small></h3>
       <p class="cap" id="rcap"></p>
+      <div class="legend"><span><i id="lgSolid" style="border-color:var(--base)"></i><var>c</var><sub><var>i</var></sub>(<var>t</var>) of the sampler's estimate</span><span><i style="border-color:var(--anchor);border-top-style:dashed"></i><var>c</var><sub><var>A</var></sub>(<var>t</var>) of the anchor <var>A</var></span></div>
       <svg class="plot" id="pr" viewBox="0 0 400 230"></svg>
+      <div class="eqbox" id="eqbox" aria-live="polite"></div>
       <div class="ctl">
         <div class="seg" role="group" aria-label="Which run to show">
           <button id="mBase" aria-pressed="true">Baseline sampler</button>
@@ -193,17 +202,19 @@ const estMax = []; ['probe', 'always'].forEach(k => { if (D[k]) ['model', 'steer
 let ymax = Math.max(...D.baseline, ...D.anchorlock, estMax.length ? medi(estMax) : 0);   // spikes taller than this (the anchor's start, the blurriest early estimates) are clipped instead of squashing everything else
 ymax *= 1.3;
 
-const VW = 400, VH = 230, L = 14, R = 10, Tp = 12, B = 34;
+const VW = 400, VH = 230, L = 36, R = 10, Tp = 12, B = 42;
 const px = i => L + i / (T - 1) * (VW - L - R), py = v => VH - B - Math.min(v, ymax) / ymax * (VH - B - Tp);
 const area = c => `M${px(0)},${py(0)} ` + c.map((v, i) => `L${px(i).toFixed(1)},${py(v).toFixed(1)}`).join(' ') + ` L${px(T - 1)},${py(0)} Z`;
 const line = c => c.map((v, i) => (i ? 'L' : 'M') + px(i).toFixed(1) + ',' + py(v).toFixed(1)).join(' ');
 function axes() {
   let s = `<line x1="${L}" x2="${VW - R}" y1="${py(0)}" y2="${py(0)}" stroke="#b9b29e"/>`;
-  for (let sec = 4; sec <= 8; sec++) { const i = sec * FPS - T0; if (i < 0 || i > T - 1) continue; s += `<line x1="${px(i)}" x2="${px(i)}" y1="${py(0)}" y2="${py(0) + 4}" stroke="#b9b29e"/><text x="${px(i)}" y="${py(0) + 17}" text-anchor="middle" fill="#6b6657" font-size="11">${sec}</text>`; }
-  return s + `<text x="${(L + VW - R) / 2}" y="${VH - 4}" text-anchor="middle" fill="#6b6657" font-size="11">time in the video (s)</text>`;
+  for (let sec = 4; sec <= 8; sec++) { const i = sec * FPS - T0; if (i < 0 || i > T - 1) continue; s += `<line x1="${px(i)}" x2="${px(i)}" y1="${py(0)}" y2="${py(0) + 4}" stroke="#b9b29e"/><text x="${px(i)}" y="${py(0) + 19}" text-anchor="middle" fill="#6b6657" font-size="13">${sec}</text>`; }
+  return s + `<text x="${(L + VW - R) / 2}" y="${VH - 4}" text-anchor="middle" fill="#6b6657" font-size="13">time in the video, <tspan font-style="italic" font-family="Georgia,serif">t</tspan> (s)</text><text transform="rotate(-90)" x="${-(VH - B + Tp) / 2}" y="12" text-anchor="middle" fill="#6b6657" font-size="12.5">ball in motion (area = 1)</text>`;
 }
-const clipNote = c => Math.max(...c) > ymax ? `<text x="${VW - R}" y="${Tp + 8}" text-anchor="end" fill="#6b6657" font-size="10.5">▲ peak clipped (${(Math.max(...c) / ymax).toFixed(1)}× the height)</text>` : '';
+const clipNote = c => Math.max(...c) > ymax ? `<text x="${VW - R}" y="${Tp + 10}" text-anchor="end" fill="#6b6657" font-size="12.5">▲ peak clipped (${(Math.max(...c) / ymax).toFixed(1)}× the height)</text>` : '';
 const fillPanel = (id, c, col, extra = '') => $(id).innerHTML = axes() + clipNote(c) + `<path d="${area(c)}" fill="${col}" fill-opacity=".32"/><path d="${line(c)}" fill="none" stroke="${col}" stroke-width="2.2" stroke-linejoin="round"/>` + extra;
+const I5 = 5 * FPS - T0;
+const secondPass = v => { const a = px(I5), b = px(T - 1), m = (a + b) / 2; return `<rect x="${a}" y="${Tp}" width="${b - a}" height="${py(0) - Tp}" fill="#222222" fill-opacity=".05"/><line x1="${a}" x2="${a}" y1="${Tp}" y2="${py(0)}" stroke="#6b6657" stroke-dasharray="2 3"/><text x="${m}" y="${Tp + 30}" text-anchor="middle" fill="#6b6657" font-size="12.5">second pass (t &gt; 5 s)</text><text x="${m}" y="${Tp + 49}" text-anchor="middle" fill="#222222" font-size="15" font-weight="600">s = ${(v * 100).toFixed(0)}%</text>`; };
 const COL = { base: '#b8651b', lock: '#2f7d55', anchor: '#234f87' };
 fillPanel('pb', D.baseline, COL.base);
 fillPanel('pa', D.anchor, COL.anchor);
@@ -213,13 +224,19 @@ function render() {
   const s = cur(); if (!s) return;
   const n = s.c.length; sl.max = n - 1; step = Math.min(step, n - 1); sl.value = step;
   const empty = Math.max(...s.c) <= 0;
-  fillPanel('pr', s.c[step], mode === 'base' ? COL.base : COL.lock, `<path d="${line(D.anchor)}" fill="none" stroke="${COL.anchor}" stroke-width="2" stroke-dasharray="5 4"/>` +
-            (empty || Math.max(...s.c[step]) <= 0 ? `<text x="${VW / 2}" y="${VH / 2 - 10}" text-anchor="middle" fill="#6b6657" font-size="12">no ball found in this estimate yet</text>` : ''));
+  fillPanel('pr', s.c[step], mode === 'base' ? COL.base : COL.lock, secondPass(s.tv[step]) + `<path d="${line(D.anchor)}" fill="none" stroke="${COL.anchor}" stroke-width="2" stroke-dasharray="5 4"/>` +
+            (empty || Math.max(...s.c[step]) <= 0 ? `<text x="${VW / 2}" y="${VH / 2 - 10}" text-anchor="middle" fill="#6b6657" font-size="14">no ball found in this estimate yet</text>` : ''));
   const locked = mode === 'lock' && s.w[step] > 0;
   $('band').style.visibility = $('bandlab').style.visibility = mode === 'lock' ? 'visible' : 'hidden';
   $('ro').innerHTML = `step <b>${step + 1}</b> / ${n} &nbsp;·&nbsp; noise σ <b>${s.sigma[step].toFixed(2)}</b> &nbsp;·&nbsp; share of the ball in a second pass <b>${(s.tv[step] * 100).toFixed(0)}%</b>` + (mode === 'lock' ? ` &nbsp;·&nbsp; steering <b>${locked ? 'on' : 'off'}</b>` : '');
   $('rtitle').textContent = mode === 'base' ? 'Baseline sampler' : 'AnchorLock sampler';
-  $('rdot').style.background = COL[mode];
+  $('rdot').style.background = COL[mode]; $('lgSolid').style.borderColor = COL[mode];
+  const sn = step + 1 < n ? s.sigma[step + 1] : 0, sg = s.sigma[step], wv = mode === 'lock' ? s.w[step] : 0;
+  const hat = '<var class="b">x&#770;</var><sub>0</sub>', til = '<var class="l">x&#771;</var><sub>0</sub>', plain = '<var>x&#770;</var><sub>0</sub>';
+  const upd = x => `<div class="eqline"><var>x</var><sub><var>&sigma;</var>&prime;</sub> = (<var>&sigma;</var>&prime;/<var>&sigma;</var>)&thinsp;<var>x</var><sub><var>&sigma;</var></sub> + (1 &minus; <var>&sigma;</var>&prime;/<var>&sigma;</var>)&thinsp;${x}</div>`;
+  $('eqbox').innerHTML = mode === 'base'
+    ? `<div class="eqline">${hat} = <var>D</var><sub><var>&theta;</var></sub>(<var>x</var><sub><var>&sigma;</var></sub>, <var>&sigma;</var>, <var>c</var>)</div>${upd(hat)}<div class="eqnote">Plotted: <var>c</var><sub><var>i</var></sub>(<var>t</var>) of the decoded ${hat}. This step: <var>&sigma;</var> = <b>${sg.toFixed(2)}</b>, <var>&sigma;</var>&prime; = <b>${sn.toFixed(2)}</b>.</div>`
+    : `<div class="eqline">${til} = ${plain} + <var>w</var>(<var>&sigma;</var>)&thinsp;(<var class="a">PA</var> &minus; <var>P</var>${plain})</div>${upd(til)}<div class="eqnote">Plotted: <var>c</var><sub><var>i</var></sub>(<var>t</var>) of the decoded ${til}. This step: <var>&sigma;</var> = <b>${sg.toFixed(2)}</b>, <var>&sigma;</var>&prime; = <b>${sn.toFixed(2)}</b>, <var>w</var>(<var>&sigma;</var>) = <b>${wv.toFixed(2)}</b> (${wv > 0 ? 'steering on' : 'steering off'}).</div>`;
   $('rcap').textContent = mode === 'base' ? 'What the model predicts when nothing steers it. The second peak takes shape as the noise falls, and the curve stays away from the dashed anchor curve.'
                                           : 'What the sampler continues from once steering has pulled the prediction toward the anchor. The curve follows the dashed anchor curve.';
 }
