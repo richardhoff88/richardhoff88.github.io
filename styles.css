@@ -40,3 +40,5 @@ li { margin: 8px 0; padding-left: 2px; }
 .abstract-box .tldr { background: #e6efdc; color: #2e5a2f; border-bottom: 1px solid #d3dfc7; }
 .abstract-box .tldr strong { font-weight: 700; }
 .abs-toggle[aria-expanded="true"] { color: #d9822b; }
+.paper-links { margin: 3px 0 0; font-size: 14px; }
+.paper-links .social-sep { color: #999; margin: 0 2px; }
