@@ -42,3 +42,4 @@ li { margin: 8px 0; padding-left: 2px; }
 .abs-toggle[aria-expanded="true"] { color: #d9822b; }
 .paper-links { margin: 3px 0 0; font-size: 12.5px; }
 .paper-links .social-sep { color: #999; margin: 0 2px; }
+#research-heading { margin-top: 48px; }
