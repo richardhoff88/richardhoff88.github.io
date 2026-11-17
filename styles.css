@@ -34,7 +34,9 @@ li { margin: 8px 0; padding-left: 2px; }
 #misc-heading a { color: inherit; text-decoration: none; }
 #misc-heading a:hover { text-decoration: underline; }
 
-.abstract-box { margin: 8px 0 0; padding: 10px 14px; border-left: 2px solid #c9c2b0; font-size: 15px; line-height: 1.55; }
+.abstract-box { margin: 10px 0 0; border-left: 3px solid #2e7d32; background: #fbfaf6; font-size: 13px; line-height: 1.5; }
 .abstract-box[hidden] { display: none; }
-.abstract-box p { margin: 0 0 8px; }
-.abstract-box p:last-child { margin: 0; }
+.abstract-box p { margin: 0; padding: 8px 12px; }
+.abstract-box .tldr { background: #e6efdc; color: #2e5a2f; border-bottom: 1px solid #d3dfc7; }
+.abstract-box .tldr strong { font-weight: 700; }
+.abs-toggle[aria-expanded="true"] { color: #d9822b; }
